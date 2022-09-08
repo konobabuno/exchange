@@ -1,9 +1,11 @@
+/* Preformat a nuestra page */
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box; 
 }
 
+/* Eliminar flechas en type = number */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -15,15 +17,8 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
+/* Darle el 100% de la screen a nuestro body y html */
 html, body{
     height: 100%;
     background: linear-gradient(54deg, rgba(2,170,176,1) 0%, rgba(0,205,172,1) 35%);;
 }
-
-img{
-    width: 40%;
-}
-
-.input-error{
-    outline: 1px solid red;
-  }
