@@ -9,6 +9,12 @@ const currencyTo = document.getElementById('currencyTo')
 
 const btnExchange = document.getElementById('btnExchange')
 
+const access_key = 'yJx7twx7O2fU87AK0p1ODiXd'
+let exchange
+
+axios.defaults.baseURL = 'https://fcsapi.com'
+
+
 btnReverse.addEventListener("click", reverseFunction)
 
 function reverseFunction() {
@@ -35,27 +41,24 @@ async function exchangeFunction() {
     amountTo.setAttribute("value", amountConverted)
 }
 
-var access_key = 'yJx7twx7O2fU87AK0p1ODiXd'
-
-axios.defaults.baseURL = 'https://fcsapi.com'
-
 const exchangeCurrency = async () => {
-    var currencyFromAxios = currencyFrom.textContent
-    var currencyToAxios = currencyTo.textContent
+    let currencyFromAxios = currencyFrom.textContent
+    let currencyToAxios = currencyTo.textContent
 
-    var symbol = currencyFromAxios + '/' + currencyToAxios
-    
-    try {
-        const exchange = await axios({
+    let symbol = currencyFromAxios + '/' + currencyToAxios
+
+        await axios({
             method: 'get',
             url: '/api-v3/forex/latest',
             params: {
                 symbol,
                 access_key
             }
+        }).then( res => {
+            exchange = res.data.response[0].h
+        }).catch( error => {
+            console.log(error)
         })
-        return exchange.data.response[0].h
-    } catch (error) {
-        console.log(error)
-    }
+        return exchange
+ 
 }
